@@ -1,0 +1,22 @@
+.tickets {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .tickets-container {
+    margin: 1rem auto; /* Centers the container with less restrictive margins */
+    width: 100%;      /* Ensures it spans the parent width */
+    max-width: 1200px; /* Optional: limit the width for better layout control */
+  }
+
+  .tickets-container > h2 {
+    margin-top: 0;
+  }
+
+  .ticket {
+    background-color: var(--white);
+    border: 1px solid var(--outline);
+    margin: 0.5rem 0;
+    border-radius: 0.5rem;
+    padding: 0.5rem;
+  }
