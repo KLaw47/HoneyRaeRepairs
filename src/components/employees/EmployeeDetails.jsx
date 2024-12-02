@@ -30,6 +30,13 @@ return(
             <span className="employee-info">Rate :</span>
             {employee.rate}
         </div>
+        <div className="employee-footer">
+                currently working on{" "}
+                <span className="ticket-count">
+                    {employee.employeeTickets?.length || 0}
+                </span>{" "}
+                tickets
+        </div>
     </section>
 )
 }

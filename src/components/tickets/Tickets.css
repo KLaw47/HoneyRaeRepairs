@@ -36,3 +36,8 @@
     justify-content: space-between;
     align-items: center;           /* Ensures vertical alignment */
 }
+
+.btn-container {
+    display: flex;
+    justify-content: flex-end;
+  }
