@@ -11,7 +11,9 @@ export const Register = (props) => {
   })
   let navigate = useNavigate()
 
-  const registerNewUser = () => {
+  const registerNewUser = (e) => {
+    e.preventDefault()
+
     createUser(customer).then((createdUser) => {
       if (createdUser.hasOwnProperty("id")) {
         localStorage.setItem(
@@ -37,7 +39,7 @@ export const Register = (props) => {
 
   return (
     <main style={{ textAlign: "center" }}>
-      <form className="form-login" onSubmit={registerNewUser}>
+      <form className="form-login" onSubmit={(event) => registerNewUser(event)}>
         <h1>Honey Rae Repairs</h1>
         <h2>Please Register</h2>
         <fieldset>
