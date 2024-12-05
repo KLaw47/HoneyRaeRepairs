@@ -1,9 +1,11 @@
+
+
 export const getEmployees = () => {
-    return fetch(`http://127.0.0.1:8088/employees?_expand=user`).then((res) => res.json())
+    return fetch(`${import.meta.env.VITE_API_URL}/employees?_expand=user`).then((res) => res.json())
 };
 
 export const updateEmployee = (employee) => {
-    return fetch(`http://127.0.0.1:8088/employees/${employee.id}`, {
+    return fetch(`${import.meta.env.VITE_API_URL}/employees/${employee.id}`, {
         method: "PUT",
         headers: {
             "content-type": "application/json",

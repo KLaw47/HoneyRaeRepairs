@@ -1,9 +1,9 @@
 export const getAllTickets = () => {
-    return fetch(`http://localhost:8088/serviceTickets?_embed=employeeTickets`).then((res) => res.json())
+    return fetch(`${import.meta.env.VITE_API_URL}/serviceTickets?_embed=employeeTickets`).then((res) => res.json())
 };
 
 export const createEmployeeTicket = (employeeTicket) => {
-    return fetch(`http://localhost:8088/employeeTickets`, {
+    return fetch(`${import.meta.env.VITE_API_URL}/employeeTickets`, {
         method: "POST",
         headers: {
             "content-type": "application/json",
@@ -13,7 +13,7 @@ export const createEmployeeTicket = (employeeTicket) => {
 }
 
 export const closeTicket = (ticket) => {
-    return fetch(`http://localhost:8088/serviceTickets/${ticket.id}`, {
+    return fetch(`${import.meta.env.VITE_API_URL}/serviceTickets/${ticket.id}`, {
         method: "PUT",
         headers: {
             "content-type": "application/json",
@@ -23,7 +23,7 @@ export const closeTicket = (ticket) => {
 }
 
 export const deleteTicketById = (ticketId) => {
-    return fetch(`http://localhost:8088/serviceTickets/${ticketId}`, {
+    return fetch(`${import.meta.env.VITE_API_URL}/serviceTickets/${ticketId}`, {
         method: "DELETE",
         headers: {
             "content-type": "application/json",
@@ -32,7 +32,7 @@ export const deleteTicketById = (ticketId) => {
 }
 
 export const createTicket = (ticket) => {
-    return fetch(`http://localhost:8088/serviceTickets`, {
+    return fetch(`${import.meta.env.VITE_API_URL}/serviceTickets`, {
         method: "POST",
         headers: {
             "content-type": "application/json",
