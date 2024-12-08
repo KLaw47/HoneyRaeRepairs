@@ -1,41 +1,59 @@
-import { useState } from "react"
-import { useNavigate } from "react-router-dom"
-import "./Login.css"
-import { createUser, getUserByEmail } from "../../services/userService"
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import "./Login.css";
+import { createUser, getUserByEmail } from "../../services/userService";
+import { createEmployee } from "../../services/employeeService";
+import { createCustomer } from "../../services/customerService";
+
 
 export const Register = (props) => {
-  const [customer, setCustomer] = useState({
+  const [user, setUser] = useState({
     email: "",
     fullName: "",
     isStaff: false,
-  })
-  let navigate = useNavigate()
+  });
+  let navigate = useNavigate();
 
   const registerNewUser = (e) => {
-    e.preventDefault()
+    e.preventDefault();
 
-    createUser(customer).then((createdUser) => {
-      if (createdUser.hasOwnProperty("id")) {
-        localStorage.setItem(
-          "honey_user",
-          JSON.stringify({
-            id: createdUser.id,
-            staff: createdUser.isStaff,
-          })
-        )
+    createUser(user)
+      .then((createdUser) => {
+        if (createdUser.hasOwnProperty("id")) {
+          localStorage.setItem(
+            "honey_user",
+            JSON.stringify({
+              id: createdUser.id,
+              staff: createdUser.isStaff,
+            })
+          );
+          if (createdUser.isStaff) {
+            const newEmployee = {
+              userId: createdUser.id,
+              specialty: "",
+              rate: 0,
+            };
+            return createEmployee(newEmployee);
+          } else {
+            const newCustomer = {
+              userId: createdUser.id,
+              address: "",
+              phoneNumber: "",
+            };
+            return createCustomer(newCustomer);
+          }
+        }
+      })
+      .then(() => {
+        navigate("/");
+      });
+  };
 
-        navigate("/")
-      }
-    })
-  }
-
-
-
-  const updateCustomer = (evt) => {
-    const copy = { ...customer }
-    copy[evt.target.id] = evt.target.value
-    setCustomer(copy)
-  }
+  const updateUser = (evt) => {
+    const copy = { ...user };
+    copy[evt.target.id] = evt.target.value;
+    setUser(copy);
+  };
 
   return (
     <main style={{ textAlign: "center" }}>
@@ -45,7 +63,7 @@ export const Register = (props) => {
         <fieldset>
           <div className="form-group">
             <input
-              onChange={updateCustomer}
+              onChange={updateUser}
               type="text"
               id="fullName"
               className="form-control"
@@ -58,7 +76,7 @@ export const Register = (props) => {
         <fieldset>
           <div className="form-group">
             <input
-              onChange={updateCustomer}
+              onChange={updateUser}
               type="email"
               id="email"
               className="form-control"
@@ -72,9 +90,9 @@ export const Register = (props) => {
             <label>
               <input
                 onChange={(evt) => {
-                  const copy = { ...customer }
-                  copy.isStaff = evt.target.checked
-                  setCustomer(copy)
+                  const copy = { ...user };
+                  copy.isStaff = evt.target.checked;
+                  setUser(copy);
                 }}
                 type="checkbox"
                 id="isStaff"
@@ -92,5 +110,5 @@ export const Register = (props) => {
         </fieldset>
       </form>
     </main>
-  )
-}
+  );
+};

@@ -18,7 +18,9 @@ export const getSingleUser = (userId) => {
 export const getSingleEmployee = (id) => {
   return fetch(`${import.meta.env.VITE_API_URL}/employees?userId=${id}&_expand=user&_embed=employeeTickets`
 ).then((res) => res.json());
-};export const getUserByEmail = (email) => {
+};
+
+export const getUserByEmail = (email) => {
   return fetch(`${import.meta.env.VITE_API_URL}/users?email=${email}`).then((res) =>
     res.json()
   )
